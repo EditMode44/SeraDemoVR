@@ -10,8 +10,7 @@ public class HideHands : MonoBehaviour
 
     public void DisableHandModel(SelectEnterEventArgs arg)
     {
-        if (arg.interactableObject.transform.GetComponent<InteractableInfo>().interactableType == InteractableInfo.InteractableType.HideHands)
-        {
+        if (arg.interactableObject.transform.GetComponent<InteractableInfo>().interactableType == InteractableInfo.InteractableType.HideHands)        {
             arg.interactableObject.transform.GetComponent<InteractableInfo>().handModel.SetActive(true);
             handModel.SetActive(false);
         }
