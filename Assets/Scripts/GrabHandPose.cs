@@ -49,8 +49,23 @@ public class GrabHandPose : MonoBehaviour
             
             StartCoroutine(SetHandDataRoutine(handData, finalHandPosition, finalHandRotation, finalFingerRotations, startingHandPosition, startingHandRotation, startingFingerRotations));
         }
+    }
+
+    public void SetupPoseForInsObjects(HandData handData)
+    {
+        handData.animator.enabled = false;
+
+        if (handData.handType == HandData.HandModelType.Right)
+        {
+            SetHandDataValues(handData, rightHandPose);
+        }
+        else
+        {
+            SetHandDataValues(handData, leftHandPose);
+        }
 
 
+        StartCoroutine(SetHandDataRoutine(handData, finalHandPosition, finalHandRotation, finalFingerRotations, startingHandPosition, startingHandRotation, startingFingerRotations));
     }
 
     public void UnSetPose(BaseInteractionEventArgs arg)
@@ -63,6 +78,14 @@ public class GrabHandPose : MonoBehaviour
             SetHandData(handData, startingHandPosition, startingHandRotation, startingFingerRotations);
             StartCoroutine(SetHandDataRoutine(handData, startingHandPosition, startingHandRotation, startingFingerRotations, finalHandPosition, finalHandRotation, finalFingerRotations));
         }
+    }
+
+    public void UnSetupPoseForInsObjects(HandData handData)
+    {
+        handData.animator.enabled = true;
+
+        SetHandData(handData, startingHandPosition, startingHandRotation, startingFingerRotations);
+        StartCoroutine(SetHandDataRoutine(handData, startingHandPosition, startingHandRotation, startingFingerRotations, finalHandPosition, finalHandRotation, finalFingerRotations));
     }
 
     public void SetHandDataValues(HandData h1, HandData h2)

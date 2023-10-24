@@ -2620,6 +2620,54 @@
                     "isPartOfComposite": false
                 }
             ]
+        },
+        {
+            "name": "Instantiate",
+            "id": "c7834b85-d601-40d6-8200-0d4bc618c9ca",
+            "actions": [
+                {
+                    "name": "InsLeft",
+                    "type": "Button",
+                    "id": "9f24df9f-0829-4dc1-8249-b03be213ac1d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "InsRight",
+                    "type": "Button",
+                    "id": "daa5be6d-3a60-4c5f-921a-2bf35e96828d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "1f68d3da-71b2-4e7c-89a1-bcb84b5d7685",
+                    "path": "<XRController>{LeftHand}/{SecondaryButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "InsLeft",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "c30ee3c2-c2c8-4ea5-9909-1b736eb460a5",
+                    "path": "<XRController>{RightHand}/{SecondaryButton}",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "InsRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
         }
     ],
     "controlSchemes": [

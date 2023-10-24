@@ -32,7 +32,6 @@ Material:
   - TransparentDepthPostpass
   - TransparentBackface
   - RayTracingPrepass
-  - MOTIONVECTORS
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
@@ -91,6 +90,8 @@ Material:
     - _EnableFogOnTransparent: 1
     - _Glossiness: 0.5
     - _HueVariationKwToggle: 1
+    - _MaterialID: 1
+    - _MaterialTypeMask: 2
     - _NormalMapKwToggle: 1
     - _OpaqueCullMode: 2
     - _RayTracing: 0
@@ -120,6 +121,7 @@ Material:
     - _TessellationMaxDisplacement: 0.01
     - _TessellationMode: 0
     - _TessellationShapeFactor: 0.75
+    - _TransmissionEnable: 1
     - _TransparentBackfaceEnable: 0
     - _TransparentCullMode: 2
     - _TransparentDepthPostpassEnable: 0
