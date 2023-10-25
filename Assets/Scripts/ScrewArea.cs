@@ -6,6 +6,8 @@ public class ScrewArea : MonoBehaviour
 {
     [SerializeField] private Transform targetTransform;
     [SerializeField] private float yOffset = 0.0377f;
+
+    [SerializeField] private Transform[] handTransforms;
     private GameObject screw;
 
 
@@ -27,5 +29,10 @@ public class ScrewArea : MonoBehaviour
     public bool IsHaveScrew()
     {
         return screw != null;
+    }
+
+    public Transform[] GetHandTransforms()
+    {
+        return handTransforms;
     }
 }

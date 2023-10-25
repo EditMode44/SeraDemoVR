@@ -28,6 +28,7 @@ public class Screw : MonoBehaviour
         {
             if (!screwArea.IsHaveScrew())
             {
+                nut.GetComponent<Nut>().SetScrewArea(screwArea);
                 if (isRight)
                 {
                     ScrewSpawner.instance.CancelRight();
