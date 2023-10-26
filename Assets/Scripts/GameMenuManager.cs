@@ -1,3 +1,4 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,21 +7,31 @@ using UnityEngine.InputSystem;
 public class GameMenuManager : MonoBehaviour
 {
     [SerializeField] private GameObject menu;
-    [SerializeField] private Transform head;
-    [SerializeField] private float spawnDistance = 2;
+    
     public InputActionProperty showButton;
+
+
+    private void Start()
+    {
+        menu.SetActive(false);
+        menu.transform.localScale = Vector3.zero;
+    }
 
 
     private void Update()
     {
         if (showButton.action.WasPressedThisFrame())
         {
-            menu.SetActive(!menu.activeSelf);
-
-            menu.transform.position = head.position + new Vector3(head.forward.x, 0, head.forward.z).normalized * spawnDistance;
+            if (menu.activeSelf)
+            {
+                menu.transform.DOScale(Vector3.zero, 0.5f).OnComplete(() => menu.SetActive(false));
+            }
+            else
+            {
+                menu.SetActive(true);
+                menu.transform.DOScale(Vector3.one, 0.5f);
+            }
         }
 
-        menu.transform.LookAt(new Vector3(head.position.x, menu.transform.position.y, head.position.z));
-        menu.transform.forward *= -1f;
     }
 }
