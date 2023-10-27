@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 564698886810472461}
   - component: {fileID: 5742082509355581178}
   - component: {fileID: 2591621156076118372}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Screw
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -272,6 +272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handModel: {fileID: 0}
+  leftHandModel: {fileID: 0}
   interactableType: 1
 --- !u!114 &2591621156076118372
 MonoBehaviour:

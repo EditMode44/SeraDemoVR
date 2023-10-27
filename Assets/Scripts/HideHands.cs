@@ -7,11 +7,29 @@ public class HideHands : MonoBehaviour
 {
     [SerializeField] private GameObject handModel;
 
+    public enum HandType
+    {
+        Left,
+        Right
+    }
+
+    public HandType handType;
+
 
     public void DisableHandModel(SelectEnterEventArgs arg)
     {
-        if (arg.interactableObject.transform.GetComponent<InteractableInfo>().interactableType == InteractableInfo.InteractableType.HideHands)        {
-            arg.interactableObject.transform.GetComponent<InteractableInfo>().handModel.SetActive(true);
+        if (arg.interactableObject.transform.GetComponent<InteractableInfo>().interactableType == InteractableInfo.InteractableType.HideHands)    
+        {
+            if (handType == HandType.Left)
+            {
+                arg.interactableObject.transform.GetComponent<InteractableInfo>().GetLeftHand().SetActive(true);
+            }
+            else
+            {
+                arg.interactableObject.transform.GetComponent<InteractableInfo>().GetRightHand().SetActive(true);
+            }
+
+
             handModel.SetActive(false);
         }
     }
@@ -20,7 +38,15 @@ public class HideHands : MonoBehaviour
     {
         if (arg.interactableObject.transform.GetComponent<InteractableInfo>().interactableType == InteractableInfo.InteractableType.HideHands)
         {
-            arg.interactableObject.transform.GetComponent<InteractableInfo>().handModel.SetActive(false);
+            if (handType == HandType.Left)
+            {
+                arg.interactableObject.transform.GetComponent<InteractableInfo>().GetLeftHand().SetActive(false);
+            }
+            else
+            {
+                arg.interactableObject.transform.GetComponent<InteractableInfo>().GetRightHand().SetActive(false);
+            }
+
             handModel.SetActive(true);
         }
     }

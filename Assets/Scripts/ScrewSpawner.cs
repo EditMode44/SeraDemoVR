@@ -93,4 +93,18 @@ public class ScrewSpawner : MonoBehaviour
         XRInteractionManager.SelectExit(rightInteractor, (IXRSelectInteractable)rightScrew.GetComponent<XRBaseInteractable>());
     }
 
+    public XRDirectInteractor GetLeftInteractor()
+    {
+        return leftInteractor;
+    }
+
+    public XRDirectInteractor GetRightInteractor()
+    {
+        return rightInteractor;
+    }
+
+    public XRInteractionManager GetXRInteractionManager()
+    {
+        return XRInteractionManager;
+    }
 }

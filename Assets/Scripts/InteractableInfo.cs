@@ -5,6 +5,7 @@ using UnityEngine;
 public class InteractableInfo : MonoBehaviour
 {
     public GameObject handModel;
+    public GameObject leftHandModel;
     public enum InteractableType
     {
         HideHands,
@@ -12,4 +13,14 @@ public class InteractableInfo : MonoBehaviour
     }
 
     public InteractableType interactableType;
+
+    public GameObject GetRightHand()
+    {
+        return handModel;
+    }
+
+    public GameObject GetLeftHand()
+    {
+        return leftHandModel;    
+    }
 }
