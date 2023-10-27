@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73a50cbf139715c49bd9470e1b4400e6, type: 3}
+  m_Name: TutorialMission3
+  m_EditorClassIdentifier: 
+  missionText: "Bir Objeyi tutmak i\xE7in elini objeye do\u011Fru uzat\u0131p, daire
+    i\xE7erisinde g\xF6sterilen \"Grip\" tu\u015Funa bas\u0131l\u0131 tutmal\u0131s\u0131n.
+    (Hangi el ile tutmak istiyorsan o elde bulunan tu\u015Fa bas\u0131l\u0131 tutmal\u0131s\u0131n)"
+  imageType: 0
+  circleArea: 3
+  hand: 2
+  pos: 1
+  missionCompleted: 0

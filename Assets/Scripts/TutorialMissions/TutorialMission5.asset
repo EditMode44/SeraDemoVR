@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73a50cbf139715c49bd9470e1b4400e6, type: 3}
+  m_Name: TutorialMission5
+  m_EditorClassIdentifier: 
+  missionText: "Kullan\u0131c\u0131 panelini a\xE7mak i\xE7in sol kolundaki daire
+    i\xE7erisinde g\xF6srerilen tu\u015Fa bas. Kapatmak i\xE7in tu\u015Fa tekrar
+    basman yeterli."
+  imageType: 0
+  circleArea: 1
+  hand: 0
+  pos: 0
+  missionCompleted: 0

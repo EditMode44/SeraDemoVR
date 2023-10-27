@@ -86,6 +86,12 @@ public class DrillManager : MonoBehaviour
         }
         else
         {
+            if (currentHandData == null)
+            {
+                return;
+            }
+
+
             if (currentHandData.handType == HandData.HandModelType.Right)
             {
                 if (!rightController.positionAction.reference.action.enabled)
