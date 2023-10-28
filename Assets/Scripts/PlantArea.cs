@@ -20,7 +20,14 @@ public class PlantArea : MonoBehaviour
 
     public bool GetIsHavePlantBasket()
     { 
-        return plantBasktet != null;
+        if (plantBasktet != null)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
     
 }

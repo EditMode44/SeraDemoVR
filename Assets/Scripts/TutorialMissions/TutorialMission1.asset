@@ -16,4 +16,5 @@ MonoBehaviour:
   imageType: 0
   circleArea: 0
   hand: 0
+  pos: 0
   missionCompleted: 0
