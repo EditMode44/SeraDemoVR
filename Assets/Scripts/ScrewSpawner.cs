@@ -13,6 +13,8 @@ public class ScrewSpawner : MonoBehaviour
 
 
     [SerializeField] private GameObject screw;
+    [SerializeField] public GameObject largeScrew;
+    [SerializeField] private GameObject smallScrew;
     [SerializeField] private XRDirectInteractor rightInteractor;
     [SerializeField] private XRDirectInteractor leftInteractor;
     [SerializeField] private XRInteractionManager XRInteractionManager;
@@ -20,8 +22,9 @@ public class ScrewSpawner : MonoBehaviour
 
     private GameObject leftScrew;
     private GameObject rightScrew;
-     
 
+    private GameObject requiredScrew;
+    [SerializeField] private MainPart mainPart;
     private void Awake()
     {
         if (instance == null)
@@ -43,7 +46,16 @@ public class ScrewSpawner : MonoBehaviour
         {
             if (!rightInteractor.hasSelection)
             {
-                GameObject insScrew = Instantiate(screw, rightInteractor.transform.position, Quaternion.identity);
+                if (mainPart.GetCurrentScrewArea().GetIsLarge())
+                {
+                    requiredScrew = largeScrew;
+                }
+                else
+                {
+                    requiredScrew = smallScrew;
+                }
+
+                GameObject insScrew = Instantiate(requiredScrew, rightInteractor.transform.position, Quaternion.identity);
                 insScrew.GetComponent<Screw>().SetIsRight(true);
                 XRInteractionManager.SelectEnter(rightInteractor, (IXRSelectInteractable)insScrew.GetComponent<XRBaseInteractable>());
                 insScrew.GetComponent<GrabHandPose>().SetupPoseForInsObjects(rightInteractor.GetComponentInChildren<HandData>());
@@ -58,7 +70,16 @@ public class ScrewSpawner : MonoBehaviour
         {
             if (!leftInteractor.hasSelection)
             {
-                GameObject insScrew = Instantiate(screw, leftInteractor.transform.position, Quaternion.identity);
+                if (mainPart.GetCurrentScrewArea().GetIsLarge())
+                {
+                    requiredScrew = largeScrew;
+                }
+                else
+                {
+                    requiredScrew = smallScrew;
+                }
+
+                GameObject insScrew = Instantiate(requiredScrew, leftInteractor.transform.position, Quaternion.identity);
                 insScrew.GetComponent<Screw>().SetIsRight(false);
                 XRInteractionManager.SelectEnter(leftInteractor, (IXRSelectInteractable)insScrew.GetComponent<XRBaseInteractable>());
                 insScrew.GetComponent<GrabHandPose>().SetupPoseForInsObjects(leftInteractor.GetComponentInChildren<HandData>());

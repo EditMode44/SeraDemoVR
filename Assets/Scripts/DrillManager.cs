@@ -43,7 +43,7 @@ public class DrillManager : MonoBehaviour
 
             if (nuts.Length == 1)
             {
-                if (nuts[0].transform.localPosition.y < nuts[0].GetComponent<Nut>().GetTargetY())
+                if (nuts[0].transform.localPosition.y < nuts[0].GetComponent<Nut>().GetTargetY() && !nuts[0].GetComponent<Nut>().GetScrewArea().GetCompleted())
                 {
                     if (currentHandData.handType == HandData.HandModelType.Right)
                     {
@@ -57,9 +57,7 @@ public class DrillManager : MonoBehaviour
                             rightHand.transform.DOMove(FindClosestAngleObject(nuts[0].GetComponent<Nut>().GetScrewArea().GetHandTransforms()).position, 0.2f);
                             rightHand.transform.DORotateQuaternion(FindClosestAngleObject(nuts[0].GetComponent<Nut>().GetScrewArea().GetHandTransforms()).rotation, 0.2f);
                         }
-                        rightHand.transform.position = Vector3.MoveTowards(rightHand.transform.position, new Vector3(rightHand.transform.position.x
-                            , nuts[0].transform.position.y, rightHand.transform.position.z), 0.025f * Time.deltaTime);
-
+                        rightHand.transform.position += rightHand.transform.forward * 0.025f * Time.deltaTime;
 
                     }
                     else if (currentHandData.handType == HandData.HandModelType.Left)
@@ -75,14 +73,18 @@ public class DrillManager : MonoBehaviour
                             leftHand.transform.DORotateQuaternion(FindClosestAngleObject(nuts[0].GetComponent<Nut>().GetScrewArea().GetHandTransforms()).rotation, 0.2f);
                         }
 
-                        leftHand.transform.position = Vector3.MoveTowards(leftHand.transform.position, new Vector3(leftHand.transform.position.x
-                            , nuts[0].transform.position.y, leftHand.transform.position.z), 0.025f * Time.deltaTime);
+                        leftHand.transform.position += leftHand.transform.forward * 0.025f * Time.deltaTime;
 
                     }
                     nuts[0].transform.localPosition = Vector3.MoveTowards(nuts[0].transform.localPosition, new Vector3(0f, nuts[0].GetComponent<Nut>().GetTargetY(), 0f), 0.025f * Time.deltaTime);
                     nuts[0].transform.DOBlendableLocalRotateBy(new Vector3(0f, -rotateSpeed, 0f), rotateSmooth);
                 }
+                else
+                {
+                    nuts[0].GetComponent<Nut>().GetScrewArea().SetCompleted(true);
+                }
             }
+            
         }
         else
         {

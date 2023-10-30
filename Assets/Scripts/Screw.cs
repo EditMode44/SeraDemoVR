@@ -43,8 +43,11 @@ public class Screw : MonoBehaviour
                 meshCollider.enabled = false;
 
                 screwArea.SetScrew(this.gameObject);
-                transform.DOMove(screwArea.GetTargetTransform().position - new Vector3(0f, screwArea.GetYOffset(), 0f), 0.25f).OnComplete(() => nut.SetActive(true));
-                transform.DORotate(Vector3.zero, 0.25f);
+                transform.SetParent(screwArea.transform.parent);
+                transform.DOLocalMove(Vector3.zero - new Vector3(0f, screwArea.GetYOffset(), 0f), 0.25f).OnComplete(() => nut.SetActive(true));
+                transform.DOLocalRotate(Vector3.zero, 0.25f);
+
+                //-0.0772
             }
         }
     }
