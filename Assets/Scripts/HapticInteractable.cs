@@ -46,4 +46,9 @@ public class HapticInteractable : MonoBehaviour
             controller.SendHapticImpulse(intensity, duration);
         }
     }
+
+    public void SetTriggered(bool state)
+    {
+        triggered = state;
+    }
 }

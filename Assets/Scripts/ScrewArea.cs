@@ -10,8 +10,24 @@ public class ScrewArea : MonoBehaviour
 
     [SerializeField] private Transform[] handTransforms;
     private GameObject screw;
+    [SerializeField] private Transform[] largeHandTransforms; 
+    [SerializeField] private Transform[] smallHandTransforms;
+    public bool completed;
 
-    private bool completed;
+
+    private void Start()
+    {
+        if (isLarge)
+        {
+            handTransforms = largeHandTransforms;
+        }
+        else
+        {
+            handTransforms = smallHandTransforms;
+        }
+    }
+
+    
     public Transform GetTargetTransform()
     {
         return targetTransform;

@@ -22,11 +22,11 @@ public class Screw : MonoBehaviour
     {
         isRight = state;
     }
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.gameObject.TryGetComponent(out ScrewArea screwArea))
         {
-            if (!screwArea.IsHaveScrew())
+            if (!screwArea.IsHaveScrew() && screwArea == MainPart.instance.GetCurrentScrewArea() && MainPart.instance.GetMount())
             {
                 nut.GetComponent<Nut>().SetScrewArea(screwArea);
                 if (isRight)

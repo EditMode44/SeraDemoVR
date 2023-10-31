@@ -22,6 +22,7 @@ public class DrillManager : MonoBehaviour
     [SerializeField] private ActionBasedController rightController;
 
     [SerializeField] private XRGrabInteractable interactable;
+    [SerializeField] private HapticInteractable hapticInteractable;
 
     private bool activated;
     private HandData currentHandData;
@@ -43,44 +44,49 @@ public class DrillManager : MonoBehaviour
 
             if (nuts.Length == 1)
             {
-                if (nuts[0].transform.localPosition.y < nuts[0].GetComponent<Nut>().GetTargetY() && !nuts[0].GetComponent<Nut>().GetScrewArea().GetCompleted())
+                if (nuts[0].transform.localPosition.y < nuts[0].GetComponent<Nut>().GetTargetY())
                 {
-                    if (currentHandData.handType == HandData.HandModelType.Right)
+                    if (!nuts[0].GetComponent<Nut>().GetScrewArea().GetCompleted() && MainPart.instance.GetMount())
                     {
-                        if (rightController.positionAction.reference.action.enabled)
+                        if (currentHandData.handType == HandData.HandModelType.Right)
                         {
-                            rightController.positionAction.reference.action.Disable();
-                            rightController.rotationAction.reference.action.Disable();
-                            rightController.isTrackedAction.reference.action.Disable();
-                            rightController.trackingStateAction.reference.action.Disable();
-                            
-                            rightHand.transform.DOMove(FindClosestAngleObject(nuts[0].GetComponent<Nut>().GetScrewArea().GetHandTransforms()).position, 0.2f);
-                            rightHand.transform.DORotateQuaternion(FindClosestAngleObject(nuts[0].GetComponent<Nut>().GetScrewArea().GetHandTransforms()).rotation, 0.2f);
-                        }
-                        rightHand.transform.position += rightHand.transform.forward * 0.025f * Time.deltaTime;
+                            if (rightController.positionAction.reference.action.enabled)
+                            {
+                                rightController.positionAction.reference.action.Disable();
+                                rightController.rotationAction.reference.action.Disable();
+                                rightController.isTrackedAction.reference.action.Disable();
+                                rightController.trackingStateAction.reference.action.Disable();
 
-                    }
-                    else if (currentHandData.handType == HandData.HandModelType.Left)
-                    {
-                        if (leftController.positionAction.reference.action.enabled)
+                                rightHand.transform.DOMove(FindClosestAngleObject(nuts[0].GetComponent<Nut>().GetScrewArea().GetHandTransforms()).position, 0.2f);
+                                rightHand.transform.DORotateQuaternion(FindClosestAngleObject(nuts[0].GetComponent<Nut>().GetScrewArea().GetHandTransforms()).rotation, 0.2f);
+                            }
+                            rightHand.transform.position += rightHand.transform.forward * 0.025f * Time.deltaTime;
+
+                        }
+                        else if (currentHandData.handType == HandData.HandModelType.Left)
                         {
-                            leftController.positionAction.reference.action.Disable();
-                            leftController.rotationAction.reference.action.Disable();
-                            leftController.isTrackedAction.reference.action.Disable();
-                            leftController.trackingStateAction.reference.action.Disable();
+                            if (leftController.positionAction.reference.action.enabled)
+                            {
+                                leftController.positionAction.reference.action.Disable();
+                                leftController.rotationAction.reference.action.Disable();
+                                leftController.isTrackedAction.reference.action.Disable();
+                                leftController.trackingStateAction.reference.action.Disable();
 
-                            leftHand.transform.DOMove(FindClosestAngleObject(nuts[0].GetComponent<Nut>().GetScrewArea().GetHandTransforms()).position, 0.2f);
-                            leftHand.transform.DORotateQuaternion(FindClosestAngleObject(nuts[0].GetComponent<Nut>().GetScrewArea().GetHandTransforms()).rotation, 0.2f);
+                                leftHand.transform.DOMove(FindClosestAngleObject(nuts[0].GetComponent<Nut>().GetScrewArea().GetHandTransforms()).position, 0.2f);
+                                leftHand.transform.DORotateQuaternion(FindClosestAngleObject(nuts[0].GetComponent<Nut>().GetScrewArea().GetHandTransforms()).rotation, 0.2f);
+                            }
+
+                            leftHand.transform.position += leftHand.transform.forward * 0.025f * Time.deltaTime;
+
                         }
-
-                        leftHand.transform.position += leftHand.transform.forward * 0.025f * Time.deltaTime;
-
+                        nuts[0].transform.localPosition = Vector3.MoveTowards(nuts[0].transform.localPosition, new Vector3(0f, nuts[0].GetComponent<Nut>().GetTargetY(), 0f), 0.025f * Time.deltaTime);
+                        nuts[0].transform.DOBlendableLocalRotateBy(new Vector3(0f, -rotateSpeed, 0f), rotateSmooth);
                     }
-                    nuts[0].transform.localPosition = Vector3.MoveTowards(nuts[0].transform.localPosition, new Vector3(0f, nuts[0].GetComponent<Nut>().GetTargetY(), 0f), 0.025f * Time.deltaTime);
-                    nuts[0].transform.DOBlendableLocalRotateBy(new Vector3(0f, -rotateSpeed, 0f), rotateSmooth);
                 }
                 else
                 {
+                    DeActivated();
+                    hapticInteractable.SetTriggered(false);
                     nuts[0].GetComponent<Nut>().GetScrewArea().SetCompleted(true);
                 }
             }
@@ -129,10 +135,13 @@ public class DrillManager : MonoBehaviour
 
     public void DeActivated()
     {
-        activated = false;
-        audioSource.clip = null;
-        audioSource.loop = false;
-        audioSource.PlayOneShot(drillEnd);
+        if (activated)
+        {
+            activated = false;
+            audioSource.clip = null;
+            audioSource.loop = false;
+            audioSource.PlayOneShot(drillEnd);
+        }
     }
 
     public void OnSelectEnter(SelectEnterEventArgs arg)
