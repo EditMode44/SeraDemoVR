@@ -9,7 +9,6 @@ public class BuildPart : MonoBehaviour
     [SerializeField] private GameObject particle;
     [SerializeField] private bool mountComplete;
 
-
     public void GoTargetPos()
     {
         if (!buildPartData.isMountable) 

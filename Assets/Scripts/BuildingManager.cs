@@ -12,9 +12,12 @@ public class BuildingManager : MonoBehaviour
     [SerializeField] private bool savePartTransforms;
     [SerializeField] private BuildPart[] buildParts;
     [SerializeField] private bool startAnimation;
+    [SerializeField] private GameObject[] explodeParts;
+    [SerializeField] private GameObject lastPipes;
 
     [Header("Anim Options")]
     [SerializeField] private float waitTime;
+    [SerializeField] private MainPart part;
 
 
 
@@ -39,6 +42,7 @@ public class BuildingManager : MonoBehaviour
                 part.GetBuildPartData().defaultPosition = part.transform.localPosition;
             }
         }
+
     }
 
 
@@ -46,23 +50,54 @@ public class BuildingManager : MonoBehaviour
     {
         if (startAnimation)
         {
-            BuildingAnim();
+            StartCoroutine(BuildingAnim());
             startAnimation = false;
         }    
     }
 
-    private async Task BuildingAnim()
+    private IEnumerator BuildingAnim()
     {
         for (int i = 0; i < buildParts.Length; i++)
         {
-            buildParts[i].gameObject.SetActive(true);
-            buildParts[i].GoTargetPos();
-            await Task.Delay((int)waitTime * 1000);
+            if (buildParts[i].GetBuildPartData() != null)
+            {
+                buildParts[i].gameObject.SetActive(true);
+                buildParts[i].GoTargetPos();
+                if (!buildParts[i].TryGetComponent(out MainPart mainPart))
+                {
+                    yield return new WaitForSeconds(buildParts[i].GetBuildPartData().waitTime);
+                }
+                else
+                {
+                    yield return new WaitUntil(() => part.GetCompleted());
+                    lastPipes.SetActive(true);
+                    lastPipes.transform.DOLocalMove(Vector3.zero, 1f);
+                }
+            }
+            else
+            {
+                StartCoroutine(ExplodeAnim());
+            }
         }
     }
 
+    private IEnumerator ExplodeAnim()
+    {
+        foreach(GameObject part in explodeParts)
+        {
+            Vector3 firstPos = part.transform.localPosition;
+            Vector3 firstRot = part.transform.localEulerAngles;
 
+            part.transform.localPosition += new Vector3(Random.Range(-5, 5), Random.Range(-5, 5), Random.Range(-5, 5));
+            part.transform.localEulerAngles += new Vector3(Random.Range(-100, 100), Random.Range(-100, 100), Random.Range(-100, 100));
+            part.SetActive(true);
 
+            part.transform.DOLocalMove(firstPos, 0.75f);
+            part.transform.DOLocalRotate(firstRot, 0.75f);
+
+            yield return new WaitForSeconds(0.025f);
+        }
+    }
 
 
     public void PlaySound(AudioClip clip)

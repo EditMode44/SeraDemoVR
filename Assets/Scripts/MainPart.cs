@@ -17,6 +17,7 @@ public class MainPart : MonoBehaviour
 
     private bool goPos;
 
+    private bool completed;
     private bool mount;
     private void Awake()
     {
@@ -50,6 +51,7 @@ public class MainPart : MonoBehaviour
                     }
                     buildPart.GetBuildPartData().isMountable = false;
                     buildPart.GoTargetPos();
+                    transform.DOScale(transform.localScale, 2f).OnComplete(() => completed = true);
                 }
             }
         }
@@ -85,5 +87,10 @@ public class MainPart : MonoBehaviour
     public bool GetMount()
     {
         return mount;
+    }
+
+    public bool GetCompleted()
+    {
+        return completed;
     }
 }

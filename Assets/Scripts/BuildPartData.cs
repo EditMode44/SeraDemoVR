@@ -18,4 +18,6 @@ public class BuildPartData : ScriptableObject
     public Vector3 playerPosition;
     public Vector3 playerRotation;
 
+    public float waitTime;
+
 }
