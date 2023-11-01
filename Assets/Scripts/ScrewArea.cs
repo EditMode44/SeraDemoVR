@@ -12,6 +12,9 @@ public class ScrewArea : MonoBehaviour
     private GameObject screw;
     [SerializeField] private Transform[] largeHandTransforms; 
     [SerializeField] private Transform[] smallHandTransforms;
+    [SerializeField] private GameObject largePoseParent;
+    [SerializeField] private GameObject smallPoseParent;
+    private GameObject currentParent;
     public bool completed;
 
 
@@ -20,10 +23,12 @@ public class ScrewArea : MonoBehaviour
         if (isLarge)
         {
             handTransforms = largeHandTransforms;
+            currentParent = largePoseParent;
         }
         else
         {
             handTransforms = smallHandTransforms;
+            currentParent = smallPoseParent;
         }
     }
 
@@ -67,4 +72,11 @@ public class ScrewArea : MonoBehaviour
     {
         completed = state;
     }
+
+    public GameObject GetCurrentParent()
+    {
+        return currentParent;
+    }
+
+
 }

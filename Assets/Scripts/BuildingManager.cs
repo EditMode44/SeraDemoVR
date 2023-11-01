@@ -14,6 +14,7 @@ public class BuildingManager : MonoBehaviour
     [SerializeField] private bool startAnimation;
     [SerializeField] private GameObject[] explodeParts;
     [SerializeField] private GameObject lastPipes;
+    [SerializeField] private GameObject door;
 
     [Header("Anim Options")]
     [SerializeField] private float waitTime;
@@ -79,6 +80,8 @@ public class BuildingManager : MonoBehaviour
                 StartCoroutine(ExplodeAnim());
             }
         }
+        door.transform.DOScale(1f, 1f).SetDelay(1f);
+        
     }
 
     private IEnumerator ExplodeAnim()

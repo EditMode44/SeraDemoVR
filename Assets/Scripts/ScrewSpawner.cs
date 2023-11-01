@@ -11,6 +11,7 @@ public class ScrewSpawner : MonoBehaviour
     public InputActionReference leftIns;   
     public InputActionReference rightIns;
 
+    [SerializeField] private TriggerAnim triggerAnim;
 
     [SerializeField] private GameObject screw;
     [SerializeField] public GameObject largeScrew;
@@ -46,20 +47,23 @@ public class ScrewSpawner : MonoBehaviour
         {
             if (!rightInteractor.hasSelection)
             {
-                if (mainPart.GetCurrentScrewArea().GetIsLarge())
+                if (!mainPart.GetCurrentScrewArea().IsHaveScrew())
                 {
-                    requiredScrew = largeScrew;
-                }
-                else
-                {
-                    requiredScrew = smallScrew;
-                }
+                    if (mainPart.GetCurrentScrewArea().GetIsLarge())
+                    {
+                        requiredScrew = largeScrew;
+                    }
+                    else
+                    {
+                        requiredScrew = smallScrew;
+                    }
 
-                GameObject insScrew = Instantiate(requiredScrew, rightInteractor.transform.position, Quaternion.identity);
-                insScrew.GetComponent<Screw>().SetIsRight(true);
-                XRInteractionManager.SelectEnter(rightInteractor, (IXRSelectInteractable)insScrew.GetComponent<XRBaseInteractable>());
-                insScrew.GetComponent<GrabHandPose>().SetupPoseForInsObjects(rightInteractor.GetComponentInChildren<HandData>());
-                rightScrew = insScrew;
+                    GameObject insScrew = Instantiate(requiredScrew, rightInteractor.transform.position, Quaternion.identity);
+                    insScrew.GetComponent<Screw>().SetIsRight(true);
+                    XRInteractionManager.SelectEnter(rightInteractor, (IXRSelectInteractable)insScrew.GetComponent<XRBaseInteractable>());
+                    insScrew.GetComponent<GrabHandPose>().SetupPoseForInsObjects(rightInteractor.GetComponentInChildren<HandData>());
+                    rightScrew = insScrew;
+                }
             }
         }
     }
@@ -70,20 +74,23 @@ public class ScrewSpawner : MonoBehaviour
         {
             if (!leftInteractor.hasSelection)
             {
-                if (mainPart.GetCurrentScrewArea().GetIsLarge())
+                if (!mainPart.GetCurrentScrewArea().IsHaveScrew())
                 {
-                    requiredScrew = largeScrew;
-                }
-                else
-                {
-                    requiredScrew = smallScrew;
-                }
+                    if (mainPart.GetCurrentScrewArea().GetIsLarge())
+                    {
+                        requiredScrew = largeScrew;
+                    }
+                    else
+                    {
+                        requiredScrew = smallScrew;
+                    }
 
-                GameObject insScrew = Instantiate(requiredScrew, leftInteractor.transform.position, Quaternion.identity);
-                insScrew.GetComponent<Screw>().SetIsRight(false);
-                XRInteractionManager.SelectEnter(leftInteractor, (IXRSelectInteractable)insScrew.GetComponent<XRBaseInteractable>());
-                insScrew.GetComponent<GrabHandPose>().SetupPoseForInsObjects(leftInteractor.GetComponentInChildren<HandData>());
-                leftScrew = insScrew;
+                    GameObject insScrew = Instantiate(requiredScrew, leftInteractor.transform.position, Quaternion.identity);
+                    insScrew.GetComponent<Screw>().SetIsRight(false);
+                    XRInteractionManager.SelectEnter(leftInteractor, (IXRSelectInteractable)insScrew.GetComponent<XRBaseInteractable>());
+                    insScrew.GetComponent<GrabHandPose>().SetupPoseForInsObjects(leftInteractor.GetComponentInChildren<HandData>());
+                    leftScrew = insScrew;
+                }
             }
         }
     }

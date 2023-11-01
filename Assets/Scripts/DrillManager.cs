@@ -26,7 +26,6 @@ public class DrillManager : MonoBehaviour
 
     private bool activated;
     private HandData currentHandData;
-
     private void Awake()
     {
         interactable.selectEntered.AddListener(OnSelectEnter);
@@ -50,6 +49,8 @@ public class DrillManager : MonoBehaviour
                     {
                         if (currentHandData.handType == HandData.HandModelType.Right)
                         {
+                            
+
                             if (rightController.positionAction.reference.action.enabled)
                             {
                                 rightController.positionAction.reference.action.Disable();
@@ -59,12 +60,16 @@ public class DrillManager : MonoBehaviour
 
                                 rightHand.transform.DOMove(FindClosestAngleObject(nuts[0].GetComponent<Nut>().GetScrewArea().GetHandTransforms()).position, 0.2f);
                                 rightHand.transform.DORotateQuaternion(FindClosestAngleObject(nuts[0].GetComponent<Nut>().GetScrewArea().GetHandTransforms()).rotation, 0.2f);
+
+
                             }
                             rightHand.transform.position += rightHand.transform.forward * 0.025f * Time.deltaTime;
-
+                            nuts[0].GetComponent<Nut>().GetScrewArea().GetCurrentParent().transform.position += nuts[0].GetComponent<Nut>().GetScrewArea().GetCurrentParent().transform.up * 0.025f * Time.deltaTime;
                         }
                         else if (currentHandData.handType == HandData.HandModelType.Left)
                         {
+                            
+
                             if (leftController.positionAction.reference.action.enabled)
                             {
                                 leftController.positionAction.reference.action.Disable();
@@ -77,10 +82,11 @@ public class DrillManager : MonoBehaviour
                             }
 
                             leftHand.transform.position += leftHand.transform.forward * 0.025f * Time.deltaTime;
-
+                            nuts[0].GetComponent<Nut>().GetScrewArea().GetCurrentParent().transform.position += nuts[0].GetComponent<Nut>().GetScrewArea().GetCurrentParent().transform.up * 0.025f * Time.deltaTime;
                         }
                         nuts[0].transform.localPosition = Vector3.MoveTowards(nuts[0].transform.localPosition, new Vector3(0f, nuts[0].GetComponent<Nut>().GetTargetY(), 0f), 0.025f * Time.deltaTime);
                         nuts[0].transform.DOBlendableLocalRotateBy(new Vector3(0f, -rotateSpeed, 0f), rotateSmooth);
+                        
                     }
                 }
                 else

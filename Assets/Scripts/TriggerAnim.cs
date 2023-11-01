@@ -17,4 +17,9 @@ public class TriggerAnim : MonoBehaviour
             }
         }
     }
+
+    public bool GetTriggered()
+    {
+        return triggered;
+    }
 }

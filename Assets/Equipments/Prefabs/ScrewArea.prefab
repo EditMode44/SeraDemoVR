@@ -976,6 +976,8 @@ MonoBehaviour:
   - {fileID: 2619176798984585802}
   - {fileID: 3868279655995281989}
   - {fileID: 8854254411845341242}
+  largePoseParent: {fileID: 3775643694325150146}
+  smallPoseParent: {fileID: 8230121982810268057}
   completed: 0
 --- !u!1 &8902603277250538732
 GameObject:
