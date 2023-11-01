@@ -44,7 +44,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9084348898922252591}
-  m_Mesh: {fileID: 0}
+  m_Mesh: {fileID: 5666043150975400040, guid: ccb6bf7fd7ba4a24299c42f709cff404, type: 3}
 --- !u!23 &2211379533383745407
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -303,4 +303,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   handModel: {fileID: 0}
+  leftHandModel: {fileID: 0}
   interactableType: 1
