@@ -20,3 +20,4 @@ MonoBehaviour:
   isMountable: 1
   playerPosition: {x: 0.59, y: 1.2, z: -21.92}
   playerRotation: {x: 0, y: -90, z: 90}
+  waitTime: 1
