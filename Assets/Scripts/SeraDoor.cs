@@ -7,6 +7,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class SeraDoor : MonoBehaviour
 {
     [SerializeField] private BuildPart[] seraPlantParts;
+    [SerializeField] private GameObject[] boxes;
     [SerializeField] private GameObject hologram;
     private bool animCompleted;
 
@@ -15,6 +16,10 @@ public class SeraDoor : MonoBehaviour
     {
         if (!animCompleted && other.gameObject.TryGetComponent(out LocomotionSystem loc))
         {
+            foreach (GameObject box in boxes)
+            {
+                box.transform.DOScale(1f, 0.5f);
+            }
             StartCoroutine(SeraPlantAnim());
             animCompleted = true;
         }

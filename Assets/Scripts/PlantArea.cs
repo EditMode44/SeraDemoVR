@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlantArea : MonoBehaviour
 {
     [SerializeField] private Transform plantTransform;
+    [SerializeField] private SeedCacher seedCacher;
 
     private GameObject plantBasktet;
     private bool isHavePlantBasktet;
@@ -28,6 +29,12 @@ public class PlantArea : MonoBehaviour
         {
             return false;
         }
+    }
+
+
+    public SeedCacher GetSeedCacher()
+    {
+        return seedCacher;
     }
     
 }

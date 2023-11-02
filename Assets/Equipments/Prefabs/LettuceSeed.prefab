@@ -108,6 +108,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 7577834479856657819}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 7bd78b835ae3edd45a7b933eb34f41d6,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 347943437719450911}
   m_SourcePrefab: {fileID: 100100000, guid: 7bd78b835ae3edd45a7b933eb34f41d6, type: 3}
 --- !u!4 &3670280137917274057 stripped
 Transform:
@@ -339,3 +343,15 @@ MonoBehaviour:
   handModel: {fileID: 0}
   leftHandModel: {fileID: 0}
   interactableType: 1
+--- !u!114 &347943437719450911
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4153626152072334707}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a300a27b1f70674095950c737f7f782, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

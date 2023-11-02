@@ -683,6 +683,7 @@ MonoBehaviour:
   leftController: {fileID: 0}
   rightController: {fileID: 0}
   interactable: {fileID: 0}
+  hapticInteractable: {fileID: 0}
 --- !u!82 &7736138670897130160
 AudioSource:
   m_ObjectHideFlags: 0

@@ -29,7 +29,7 @@ public class PlantingBasket : MonoBehaviour
                 rb.isKinematic = true;
                 meshCollider.convex = false;
                 interactable.enabled = false;
-                transform.DOMove(plantArea.GetPlantTransform().position, 0.5f);
+                transform.DOMove(plantArea.GetPlantTransform().position - new Vector3(0f, 0.063f, 0f), 0.5f);
                 transform.DORotateQuaternion(plantArea.GetPlantTransform().rotation, 0.5f);
                 
             }
