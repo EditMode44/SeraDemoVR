@@ -9,8 +9,10 @@ public class SeraDoor : MonoBehaviour
     [SerializeField] private BuildPart[] seraPlantParts;
     [SerializeField] private GameObject[] boxes;
     [SerializeField] private GameObject hologram;
+    [SerializeField] private GameObject plantingBasketsParent;
+    [SerializeField] private GameObject seedsParent;
     private bool animCompleted;
-
+    private bool boxCompleted;
 
     private void OnTriggerEnter(Collider other)
     {
@@ -18,13 +20,23 @@ public class SeraDoor : MonoBehaviour
         {
             foreach (GameObject box in boxes)
             {
-                box.transform.DOScale(1f, 0.5f);
+                box.transform.DOScale(1f, 0.5f).OnComplete(() => boxCompleted = true);
             }
             StartCoroutine(SeraPlantAnim());
             animCompleted = true;
         }
     }
 
+
+    private void Update()
+    {
+        if (boxCompleted)
+        {
+            plantingBasketsParent.SetActive(true);
+            seedsParent.SetActive(true);
+            boxCompleted = false;
+        }
+    }
 
     private IEnumerator SeraPlantAnim()
     {

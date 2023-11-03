@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultPosition: {x: 1.3127742, y: 0.074999996, z: -4.078378}
   defaultRotation: {x: 0, y: 0, z: 0}
-  sound: {fileID: 0}
+  sound: {fileID: 8300000, guid: 132444cb1d4444243b0eab4b79b39fb6, type: 3}
   easeType: 11
   smoothTime: 1
   isMountable: 0

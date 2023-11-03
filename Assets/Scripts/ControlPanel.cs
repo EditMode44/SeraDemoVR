@@ -13,9 +13,9 @@ public class ControlPanel : MonoBehaviour
     [SerializeField] private AudioClip menuSelectClip;
     [SerializeField] private AudioSource audioSource;
 
-    private int celciousValue = 28;
-    private float phValue = 7.1f;
-    private int minValue = 12;
+    private int celciousValue = 27;
+    private float phValue = 7f;
+    private int minValue = 11;
 
 
     private void Update()
@@ -80,6 +80,21 @@ public class ControlPanel : MonoBehaviour
     {
         x -= amount;
         audioSource.PlayOneShot(menuSelectClip);
+    }
+
+    public int GetCelciousValue()
+    {
+        return celciousValue;
+    }
+
+    public string GetPhValue()
+    {
+        return phText.text;
+    }
+
+    public int GetMinValue()
+    {
+        return minValue;
     }
 
 }
