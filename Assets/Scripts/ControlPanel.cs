@@ -12,6 +12,7 @@ public class ControlPanel : MonoBehaviour
     [SerializeField] private GameObject controlPanel;
     [SerializeField] private AudioClip menuSelectClip;
     [SerializeField] private AudioSource audioSource;
+    [SerializeField] private Fan[] fans;
 
     private int celciousValue = 27;
     private float phValue = 7f;
@@ -97,4 +98,20 @@ public class ControlPanel : MonoBehaviour
         return minValue;
     }
 
+
+    public void StartFans()
+    {
+        foreach (Fan fan in fans)
+        {
+            fan.StartFan();
+        }
+    }
+
+    public void StopFans()
+    {
+        foreach (Fan fan in fans)
+        {
+            fan.StopFan();
+        }
+    }
 }

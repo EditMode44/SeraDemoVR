@@ -6,6 +6,8 @@ using UnityEngine.XR.Interaction.Toolkit;
 public class HideHands : MonoBehaviour
 {
     [SerializeField] private GameObject handModel;
+    [SerializeField] private XRDirectInteractor interactor;
+    [SerializeField] private XRDirectInteractor baseHand;
 
     public enum HandType
     {
@@ -29,7 +31,11 @@ public class HideHands : MonoBehaviour
                 arg.interactableObject.transform.GetComponent<InteractableInfo>().GetRightHand().SetActive(true);
             }
 
-
+            interactor.selectActionTrigger = XRBaseControllerInteractor.InputTriggerType.StateChange;
+            if (arg.interactableObject.transform.TryGetComponent(out DoorX door))
+            {
+                baseHand.selectActionTrigger = XRBaseControllerInteractor.InputTriggerType.StateChange;
+            }
             handModel.SetActive(false);
         }
     }
@@ -46,8 +52,12 @@ public class HideHands : MonoBehaviour
             {
                 arg.interactableObject.transform.GetComponent<InteractableInfo>().GetRightHand().SetActive(false);
             }
-
-            handModel.SetActive(true);
+            interactor.selectActionTrigger = XRBaseControllerInteractor.InputTriggerType.Sticky;
+            if (arg.interactableObject.transform.TryGetComponent(out DoorX door))
+            {
+                baseHand.selectActionTrigger = XRBaseControllerInteractor.InputTriggerType.Sticky;
+            }
+            handModel.SetActive(true);  
         }
     }
 }

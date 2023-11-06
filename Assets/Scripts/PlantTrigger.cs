@@ -20,7 +20,7 @@ public class PlantTrigger : MonoBehaviour
 
     private void Update()
     {
-        if (seedCacher[0].GetIsHaveSeed() && seedCacher[1].GetIsHaveSeed() && seedCacher[2].GetIsHaveSeed() && seedCacher[3].GetIsHaveSeed() && seedCacher[4].GetIsHaveSeed() && seedCacher[5].GetIsHaveSeed())
+        if (seedCacher[0].GetIsHaveSeed() && seedCacher[1].GetIsHaveSeed() && seedCacher[2].GetIsHaveSeed() && seedCacher[3].GetIsHaveSeed())
         {
             if(!next)
             {

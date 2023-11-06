@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 529871107598056931}
   - component: {fileID: 3423846589446483260}
   - component: {fileID: 2973222394068362940}
+  - component: {fileID: 2938199153713054060}
   m_Layer: 7
   m_Name: Planting Baskets
   m_TagString: Untagged
@@ -321,3 +322,27 @@ MonoBehaviour:
   interactable: {fileID: 529871107598056931}
   meshCollider: {fileID: 8009588955826504867}
   rb: {fileID: 6908307017049906413}
+  capsuleCollider: {fileID: 2938199153713054060}
+--- !u!136 &2938199153713054060
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8611035815110126957}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 0
+  serializedVersion: 2
+  m_Radius: 0.09248364
+  m_Height: 0.18921494
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.09460747, z: -0.000000007450581}

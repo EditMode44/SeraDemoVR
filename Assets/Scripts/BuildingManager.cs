@@ -9,17 +9,19 @@ public class BuildingManager : MonoBehaviour
     public static BuildingManager instance;
 
     [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip montajFinish;
     [SerializeField] private bool savePartTransforms;
     [SerializeField] private BuildPart[] buildParts;
     [SerializeField] private bool startAnimation;
     [SerializeField] private GameObject[] explodeParts;
     [SerializeField] private GameObject lastPipes;
     [SerializeField] private GameObject door;
+    [SerializeField] private AudioClip metalAudio;
 
     [Header("Anim Options")]
     [SerializeField] private float waitTime;
     [SerializeField] private MainPart part;
-
+    [SerializeField] private Camera playerCamera;
 
 
     private void Awake()
@@ -78,16 +80,18 @@ public class BuildingManager : MonoBehaviour
             else
             {
                 StartCoroutine(ExplodeAnim());
+
             }
         }
         door.transform.DOScale(1f, 1f).SetDelay(1f);
-        
+        Invoke(nameof(PlaySound), 0.75f);
     }
 
     private IEnumerator ExplodeAnim()
     {
-        foreach(GameObject part in explodeParts)
+        for (int i = 0; i < explodeParts.Length; i++)
         {
+            GameObject part = explodeParts[i];
             Vector3 firstPos = part.transform.localPosition;
             Vector3 firstRot = part.transform.localEulerAngles;
 
@@ -97,10 +101,14 @@ public class BuildingManager : MonoBehaviour
 
             part.transform.DOLocalMove(firstPos, 0.75f);
             part.transform.DOLocalRotate(firstRot, 0.75f);
-
+            if (i % 10 == 0)
+            {
+                AudioSource.PlayClipAtPoint(metalAudio, playerCamera.transform.position);
+            }
             yield return new WaitForSeconds(0.025f);
         }
     }
+
 
 
     public void PlaySound(AudioClip clip)
@@ -113,4 +121,8 @@ public class BuildingManager : MonoBehaviour
         startAnimation = true;
     }
 
+    private void PlaySound()
+    {
+        audioSource.PlayOneShot(montajFinish);
+    }
 }

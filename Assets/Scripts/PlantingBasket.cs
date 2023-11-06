@@ -10,13 +10,20 @@ public class PlantingBasket : MonoBehaviour
     [SerializeField] private XRBaseInteractable interactable;
     [SerializeField] private MeshCollider meshCollider;
     [SerializeField] private Rigidbody rb;
+    [SerializeField] private CapsuleCollider capsuleCollider;
 
     private GameObject leftHandInteractable;
     private GameObject rightHandInteractable;
+    private GameObject seed;
+
+    private Vector3 startPosition;
+    private Quaternion startRotation;
     private void Start()
     {
         ScrewSpawner.instance.GetLeftInteractor().selectEntered.AddListener(FindLeftHandInteractable);
         ScrewSpawner.instance.GetRightInteractor().selectEntered.AddListener(FindRightHandInteractable);
+        startPosition = transform.position;
+        startRotation = transform.rotation;
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -28,11 +35,23 @@ public class PlantingBasket : MonoBehaviour
                 Cancel();
                 rb.isKinematic = true;
                 meshCollider.convex = false;
+                meshCollider.enabled = false;
                 interactable.enabled = false;
+                capsuleCollider.enabled = true;
+                capsuleCollider.isTrigger = true;
                 transform.DOMove(plantArea.GetPlantTransform().position - new Vector3(0f, 0.063f, 0f), 0.5f);
                 transform.DORotateQuaternion(plantArea.GetPlantTransform().rotation, 0.5f);
                 
             }
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (transform.position.y <= 0.4f && !rb.isKinematic)
+        {
+            transform.position = startPosition;
+            transform.rotation = startRotation;
         }
     }
 
@@ -59,5 +78,15 @@ public class PlantingBasket : MonoBehaviour
     private void FindLeftHandInteractable(SelectEnterEventArgs args)
     {
         leftHandInteractable = args.interactableObject.transform.gameObject;
+    }
+
+    public void SetSeed(GameObject seed)
+    {
+        this.seed = seed;
+    }
+
+    public bool GetIsHaveSeed()
+    {
+        return seed != null;
     }
 }

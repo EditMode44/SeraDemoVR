@@ -11,7 +11,7 @@ public class SeedCacher : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent(out LettuceSeed lettuce))
         {
-            if (!lettuce.GetComponent<Rigidbody>().isKinematic) 
+            if (lettuce.GetComponent<Rigidbody>().isKinematic) 
             {
                 isHaveSeed = true;
                 lettuce.GetComponent<XRGrabInteractable>().enabled = false;

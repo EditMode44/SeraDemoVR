@@ -37,10 +37,12 @@ public class CartController : MonoBehaviour
     public void HoverEntered()
     {
         continuousMoveProvider.moveSpeed = targetSpeed;
+        rb.isKinematic = false;
     }
 
     public void HoverExited()
     {
         continuousMoveProvider.moveSpeed = defaultPlayerMoveSpeed;
+        rb.isKinematic = false;
     }
 }

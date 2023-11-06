@@ -22,13 +22,22 @@ public class CollectTrigger : MonoBehaviour
     [SerializeField] private int correctMinValue = 12;
     [SerializeField] private ControlPanel controlPanel;
 
+    private bool playLastAudio;
+
     private void Update()
     {
         if (controlPanel.GetCelciousValue() == correctCelciousValue && controlPanel.GetPhValue() == correctPhValue && controlPanel.GetMinValue() == correctMinValue && growPlants)
         {
             audioSource.Stop();
-            audioSource.PlayOneShot(collectEndClip);
+            audioSource.PlayOneShot(collectStartClip);
             GrowPlants();
+
+            if (!playLastAudio)
+            {
+                Invoke(nameof(PlayLastAudio), 10);
+                playLastAudio = true;
+            }
+
             growPlants = false;
         }
     }
@@ -60,5 +69,10 @@ public class CollectTrigger : MonoBehaviour
         {
             item.transform.DOScale(0f, 2f);
         }
+    }
+
+    private void PlayLastAudio()
+    {
+        audioSource.PlayOneShot(collectEndClip);
     }
 }

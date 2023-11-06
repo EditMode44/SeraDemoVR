@@ -23,6 +23,8 @@ public class Tutorial : MonoBehaviour
     [SerializeField] private GameObject[] tutorialItems;
     [SerializeField] private Material[] tutorialMaterials;
     [SerializeField] private GameObject table;
+    [SerializeField] private GameObject tutorialDrill;
+    [SerializeField] private AudioClip tutorialFinish;
     public InputActionProperty movementButton;
     public InputActionProperty turnButton;
     public InputActionProperty leftScrewButton;
@@ -390,7 +392,7 @@ public class Tutorial : MonoBehaviour
 
         misions[currentMissionIndex].missionCompleted = true;
         tutorialText.DOColor(Color.green, 1f);
-        canvas.transform.DOScale(0f, 1f).SetDelay(1f);
+        canvas.transform.DOScale(0f, 1f).SetDelay(1f).OnComplete(() => audioSource.PlayOneShot(tutorialFinish));
         foreach (Material material in tutorialMaterials)
         {
             material.DOFade(0f, 2f).SetDelay(2f);
@@ -402,7 +404,7 @@ public class Tutorial : MonoBehaviour
         }
 
         door.transform.DOLocalRotate(new Vector3(0f, 116f, 0f), 1.5f).SetDelay(4f);
-        table.transform.DOLocalMove(tableTargetTransform, 1f).SetDelay(2f);
+        table.transform.DOLocalMove(tableTargetTransform, 1f).SetDelay(2f).OnComplete(() => tutorialDrill.SetActive(false));
     }
 }
 

@@ -11,7 +11,11 @@ public class MainPart : MonoBehaviour
     [SerializeField] private Vector3[] eulers;
     [SerializeField] private ScrewArea[] screwAreas;
     [SerializeField] private Pipe[] pipes;
+    [SerializeField] private AudioClip tickSound;
     [SerializeField] private BuildPart buildPart;
+    [SerializeField] private GameObject buildDrill;
+    [SerializeField] private AudioSource audioSource;
+    [SerializeField] private AudioClip audioClip;
     private int currentPosIndex = -1;
     private int currentAreaIndex;
 
@@ -28,7 +32,7 @@ public class MainPart : MonoBehaviour
     private void Start()
     {
         mount = true;
-        
+        Invoke(nameof(PlaySound), 2f);
     }
 
     private void Update()
@@ -37,6 +41,8 @@ public class MainPart : MonoBehaviour
         {
             if (screwAreas[currentAreaIndex] != screwAreas[screwAreas.Length - 1]) 
             {
+                audioSource.Stop();
+                audioSource.PlayOneShot(tickSound);
                 goPos = true;
                 currentPosIndex++;
                 currentAreaIndex++;
@@ -52,6 +58,7 @@ public class MainPart : MonoBehaviour
                     buildPart.GetBuildPartData().isMountable = false;
                     buildPart.GoTargetPos();
                     transform.DOScale(transform.localScale, 2f).OnComplete(() => completed = true);
+                    Invoke(nameof(CloseDrill), 2f);
                 }
             }
         }
@@ -92,5 +99,15 @@ public class MainPart : MonoBehaviour
     public bool GetCompleted()
     {
         return completed;
+    }
+
+    private void CloseDrill()
+    {
+        buildDrill.SetActive(false);
+    }
+
+    private void PlaySound()
+    {
+        audioSource.PlayOneShot(audioClip);
     }
 }
