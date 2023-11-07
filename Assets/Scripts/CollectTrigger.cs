@@ -26,7 +26,7 @@ public class CollectTrigger : MonoBehaviour
 
     private void Update()
     {
-        if (controlPanel.GetCelciousValue() == correctCelciousValue && controlPanel.GetPhValue() == correctPhValue && controlPanel.GetMinValue() == correctMinValue && growPlants)
+        if (controlPanel.GetCelciousValue() == correctCelciousValue && (controlPanel.GetPhValue() > 7.05f && controlPanel.GetPhValue() < 7.15f) && controlPanel.GetMinValue() == correctMinValue && growPlants)
         {
             audioSource.Stop();
             audioSource.PlayOneShot(collectStartClip);

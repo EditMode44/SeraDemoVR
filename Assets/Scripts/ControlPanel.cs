@@ -88,9 +88,9 @@ public class ControlPanel : MonoBehaviour
         return celciousValue;
     }
 
-    public string GetPhValue()
+    public float GetPhValue()
     {
-        return phText.text;
+        return phValue;
     }
 
     public int GetMinValue()

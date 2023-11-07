@@ -5,29 +5,40 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class PlantTrigger : MonoBehaviour
 {
+    public static PlantTrigger instance;
     [SerializeField] private AudioSource audioSource;
     [SerializeField] private AudioClip plantClip;
     [SerializeField] private AudioClip plantCompleteClip;
 
-    [SerializeField] private SeedCacher[] seedCacher;
+    
     [SerializeField] private GameObject triggerArea;
     [SerializeField] private GameObject collectTrigger;
+
+    private List<PlantingBasket> plantingBaskets = new List<PlantingBasket>();  
 
     private bool triggered;
 
     private bool next;
 
 
+    private void Awake()
+    {
+        instance = this;
+    }
+
     private void Update()
     {
-        if (seedCacher[0].GetIsHaveSeed() && seedCacher[1].GetIsHaveSeed() && seedCacher[2].GetIsHaveSeed() && seedCacher[3].GetIsHaveSeed())
+        if (plantingBaskets.Count == 4)
         {
-            if(!next)
+            if (plantingBaskets[0].GetIsHaveSeed() && plantingBaskets[1].GetIsHaveSeed() && plantingBaskets[2].GetIsHaveSeed() && plantingBaskets[3].GetIsHaveSeed())
             {
-                audioSource.PlayOneShot(plantCompleteClip);
-                triggerArea.SetActive(false);
-                collectTrigger.SetActive(true);
-                next = true;
+                if (!next)
+                {
+                    audioSource.PlayOneShot(plantCompleteClip);
+                    triggerArea.SetActive(false);
+                    collectTrigger.SetActive(true);
+                    next = true;
+                }
             }
         }
     }
@@ -43,6 +54,11 @@ public class PlantTrigger : MonoBehaviour
                 triggered = true;
             }
         }
+    }
+
+    public List<PlantingBasket> GetPlantingBaskets()
+    {
+        return plantingBaskets;
     }
 
 }

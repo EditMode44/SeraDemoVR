@@ -32,6 +32,7 @@ public class PlantingBasket : MonoBehaviour
             if (!plantArea.GetIsHavePlantBasket())
             {
                 plantArea.SetPlantBasktet(this.gameObject);
+                PlantTrigger.instance.GetPlantingBaskets().Add(this);
                 Cancel();
                 rb.isKinematic = true;
                 meshCollider.convex = false;
