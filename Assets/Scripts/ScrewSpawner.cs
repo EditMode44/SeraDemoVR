@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.XR;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class ScrewSpawner : MonoBehaviour
@@ -39,6 +40,11 @@ public class ScrewSpawner : MonoBehaviour
 
         leftIns.action.started += InstantiateLeft;
         rightIns.action.started += InstantiateRight;
+    }
+
+    private void Start()
+    {
+        XRSettings.eyeTextureResolutionScale = 1.25f;
     }
 
     private void InstantiateRight(InputAction.CallbackContext obj)
