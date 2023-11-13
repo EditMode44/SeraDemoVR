@@ -7,15 +7,26 @@ public class Screw : MonoBehaviour
 {
     [SerializeField] private GameObject nut;
     [SerializeField] private Vector3 nutTargetTransform;
+    [SerializeField] private bool canBeRepositioned;
     private bool isRight;
     private Rigidbody rb;
-    private MeshCollider meshCollider;
+    private CapsuleCollider capsuleCollider;
+
+
+    private Vector3 startPosition;
+    private Quaternion startRotation;
 
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        meshCollider = GetComponent<MeshCollider>();
+        capsuleCollider = GetComponent<CapsuleCollider>();
+    }
+
+    private void Start()
+    {
+        startPosition = transform.position;
+        startRotation = transform.rotation;
     }
 
     public void SetIsRight(bool state)
@@ -40,7 +51,7 @@ public class Screw : MonoBehaviour
 
                 Destroy(GetComponent<XRGrabInteractableTwoAttach>());
                 Destroy(rb);
-                meshCollider.enabled = false;
+                capsuleCollider.enabled = false;
 
                 screwArea.SetScrew(this.gameObject);
                 transform.SetParent(screwArea.transform.parent);
@@ -48,6 +59,18 @@ public class Screw : MonoBehaviour
                 transform.DOLocalRotate(Vector3.zero, 0.25f);
 
                 //-0.0772
+            }
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (canBeRepositioned)
+        {
+            if (transform.position.y < 0.5979f && !rb.isKinematic)
+            {
+                transform.position = startPosition;
+                transform.rotation = startRotation;
             }
         }
     }

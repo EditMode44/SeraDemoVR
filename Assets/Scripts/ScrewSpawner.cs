@@ -20,7 +20,8 @@ public class ScrewSpawner : MonoBehaviour
     [SerializeField] private XRDirectInteractor rightInteractor;
     [SerializeField] private XRDirectInteractor leftInteractor;
     [SerializeField] private XRInteractionManager XRInteractionManager;
-
+    [SerializeField] private ScrewInsInfo leftInfo;
+    [SerializeField] private ScrewInsInfo rightInfo;
 
     private GameObject leftScrew;
     private GameObject rightScrew;
@@ -49,7 +50,7 @@ public class ScrewSpawner : MonoBehaviour
 
     private void InstantiateRight(InputAction.CallbackContext obj)
     {
-        if (rightScrew == null)
+        if (rightScrew == null && rightInfo.GetInstantiateable())
         {
             if (!rightInteractor.hasSelection)
             {
@@ -76,8 +77,8 @@ public class ScrewSpawner : MonoBehaviour
 
     private void InstantiateLeft(InputAction.CallbackContext obj)
     {
-        if (leftScrew == null)
-        {
+        if (leftScrew == null && leftInfo.GetInstantiateable())
+        {   
             if (!leftInteractor.hasSelection)
             {
                 if (!mainPart.GetCurrentScrewArea().IsHaveScrew())
@@ -141,4 +142,6 @@ public class ScrewSpawner : MonoBehaviour
     {
         return XRInteractionManager;
     }
+
+
 }

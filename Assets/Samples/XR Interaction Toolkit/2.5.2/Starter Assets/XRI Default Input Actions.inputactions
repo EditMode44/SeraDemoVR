@@ -2668,7 +2668,7 @@
                 {
                     "name": "",
                     "id": "1f68d3da-71b2-4e7c-89a1-bcb84b5d7685",
-                    "path": "<XRController>{LeftHand}/{SecondaryButton}",
+                    "path": "<XRController>{LeftHand}/gripButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -2679,11 +2679,39 @@
                 {
                     "name": "",
                     "id": "c30ee3c2-c2c8-4ea5-9909-1b736eb460a5",
-                    "path": "<XRController>{RightHand}/{SecondaryButton}",
+                    "path": "<XRController>{RightHand}/gripButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "InsRight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "Teleport",
+            "id": "e1340432-5b5a-45b3-81b6-c1f6aeb45478",
+            "actions": [
+                {
+                    "name": "TeleportLeft",
+                    "type": "Button",
+                    "id": "3a598f1b-0630-4e15-9592-303d87c8c01f",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "916e92f8-183a-4dcb-98d3-7d8c150af9c2",
+                    "path": "<XRController>{LeftHand}/thumbstickClicked",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "TeleportLeft",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

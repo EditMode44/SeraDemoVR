@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using UnityEngine.XR.Interaction.Toolkit;
 
 public class Tutorial : MonoBehaviour
@@ -25,6 +27,7 @@ public class Tutorial : MonoBehaviour
     [SerializeField] private GameObject table;
     [SerializeField] private GameObject tutorialDrill;
     [SerializeField] private AudioClip tutorialFinish;
+    [SerializeField] private Image fadeImage;
     public InputActionProperty movementButton;
     public InputActionProperty turnButton;
     public InputActionProperty leftScrewButton;
@@ -78,7 +81,9 @@ public class Tutorial : MonoBehaviour
     {
         ResetTutorials();
         canvas.transform.localScale = Vector3.zero;
-        Invoke(nameof(StartTutorial), 2.5f);
+        fadeImage.DOFade(0f, 1f).OnComplete(() =>
+        Invoke(nameof(StartTutorial), 2f)
+        ).SetDelay(2f);
         playSound = true;
         tutorialMaterials[0].DOFade(0.95f, 0f);
     }
@@ -294,22 +299,7 @@ public class Tutorial : MonoBehaviour
                 }
                 break;
             case 3:
-                if ((leftScrewButton.action.WasPressedThisFrame() || rightScrewButton.action.WasPressedThisFrame()) && !misions[3].missionCompleted && playSound)
-                {
-                    MisionCompleteActions();
-                }
-                break;
-            case 4:
-                if (controlPanelButton.action.WasPressedThisFrame() && !misions[4].missionCompleted && playSound)
-                {
-                    if (controlPanelButton.action.WasPressedThisFrame())
-                    {
-                        MisionCompleteActions();
-                    }
-                }
-                break;
-            case 5:
-                if ((leftInteractor.hasSelection || rightInteractor.hasSelection) && !misions[5].missionCompleted && playSound)
+                if ((leftInteractor.hasSelection || rightInteractor.hasSelection) && !misions[3].missionCompleted && playSound)
                 {
                     if (leftSelectedObject != null)
                     {
@@ -321,7 +311,7 @@ public class Tutorial : MonoBehaviour
                                 return;
                             }
                         }
-                        
+
                     }
 
                     if (rightSelectedObject != null)
@@ -405,6 +395,11 @@ public class Tutorial : MonoBehaviour
 
         door.transform.DOLocalRotate(new Vector3(0f, 116f, 0f), 1.5f).SetDelay(4f);
         table.transform.DOLocalMove(tableTargetTransform, 1f).SetDelay(2f).OnComplete(() => tutorialDrill.SetActive(false));
+    }
+
+    public void RestartSera()
+    {
+        fadeImage.DOFade(1f, 1f).OnComplete(() => SceneManager.LoadScene(0));
     }
 }
 

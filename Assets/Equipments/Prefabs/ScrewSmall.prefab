@@ -9,12 +9,12 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6857348939010817729}
-  - component: {fileID: 1383098389665170737}
   - component: {fileID: 4888930148894741661}
   - component: {fileID: 5023813381849001964}
   - component: {fileID: 5650556088568487679}
   - component: {fileID: 2227710726739082980}
   - component: {fileID: 8725856574819696104}
+  - component: {fileID: 2486046368339283501}
   m_Layer: 7
   m_Name: ScrewSmall
   m_TagString: Untagged
@@ -41,28 +41,6 @@ Transform:
   - {fileID: 339166254378049257}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!64 &1383098389665170737
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3536176698846374127}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: -2818384360346437698, guid: 4dac27ee12b748e45b0a01cd8e882ed1, type: 3}
 --- !u!54 &4888930148894741661
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -288,6 +266,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nut: {fileID: 8156863567992147666}
   nutTargetTransform: {x: 0, y: 0.04081631, z: 0}
+--- !u!136 &2486046368339283501
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3536176698846374127}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.03
+  m_Height: 0.12
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.054, z: 0}
 --- !u!1 &8156863567992147666
 GameObject:
   m_ObjectHideFlags: 0
@@ -1184,6 +1185,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Right Hand Model (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 5686134208185362930, guid: 1fd3a7c43c8190f4d8c167ebde694364,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5686134208192617028, guid: 1fd3a7c43c8190f4d8c167ebde694364,
         type: 3}
