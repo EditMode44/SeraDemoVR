@@ -29,15 +29,7 @@ public class CollectTrigger : MonoBehaviour
         if (controlPanel.GetCelciousValue() == correctCelciousValue && (controlPanel.GetPhValue() > 7.05f && controlPanel.GetPhValue() < 7.15f) && controlPanel.GetMinValue() == correctMinValue && growPlants)
         {
             audioSource.Stop();
-            audioSource.PlayOneShot(collectStartClip);
-            GrowPlants();
-
-            if (!playLastAudio)
-            {
-                Invoke(nameof(PlayLastAudio), 10);
-                playLastAudio = true;
-            }
-
+            
             growPlants = false;
         }
     }
@@ -49,7 +41,15 @@ public class CollectTrigger : MonoBehaviour
         {
             if (!triggered)
             {
-                audioSource.PlayOneShot(panelClip);
+                audioSource.PlayOneShot(collectStartClip);
+                GrowPlants();
+
+                if (!playLastAudio)
+                {
+                    Invoke(nameof(PlayLastAudio), 10);
+                    playLastAudio = true;
+                }
+
                 triggered = true;
             }
         }

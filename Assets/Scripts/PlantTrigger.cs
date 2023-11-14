@@ -13,6 +13,7 @@ public class PlantTrigger : MonoBehaviour
     
     [SerializeField] private GameObject triggerArea;
     [SerializeField] private GameObject collectTrigger;
+    [SerializeField] private Transform collectTransform;
 
     private List<PlantingBasket> plantingBaskets = new List<PlantingBasket>();  
 
@@ -20,6 +21,8 @@ public class PlantTrigger : MonoBehaviour
 
     private bool next;
 
+    [SerializeField] private XRDirectInteractor interactor;
+    [SerializeField] private XRDirectInteractor baseHand;
 
     private void Awake()
     {
@@ -37,6 +40,9 @@ public class PlantTrigger : MonoBehaviour
                     audioSource.PlayOneShot(plantCompleteClip);
                     triggerArea.SetActive(false);
                     collectTrigger.SetActive(true);
+                    interactor.selectActionTrigger = XRBaseControllerInteractor.InputTriggerType.StateChange;
+                    baseHand.selectActionTrigger = XRBaseControllerInteractor.InputTriggerType.StateChange;
+                    Invoke(nameof(Teleport), 2.5f);
                     next = true;
                 }
             }
@@ -50,7 +56,7 @@ public class PlantTrigger : MonoBehaviour
         {
             if (!triggered)
             {
-                audioSource.PlayOneShot(plantClip);
+                Invoke(nameof(PlayAudio), 1.5f);
                 triggered = true;
             }
         }
@@ -61,4 +67,13 @@ public class PlantTrigger : MonoBehaviour
         return plantingBaskets;
     }
 
+    private void Teleport()
+    {
+        TeleportManager.instance.Teleport(collectTransform);
+    }
+
+    public void PlayAudio()
+    {
+        audioSource.PlayOneShot(plantClip);
+    }
 }

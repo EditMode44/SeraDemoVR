@@ -266,6 +266,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nut: {fileID: 8156863567992147666}
   nutTargetTransform: {x: 0, y: 0.04081631, z: 0}
+  canBeRepositioned: 0
 --- !u!136 &2486046368339283501
 CapsuleCollider:
   m_ObjectHideFlags: 0

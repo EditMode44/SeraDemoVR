@@ -24,10 +24,6 @@ public class ScrewInsInfo : MonoBehaviour
         {
             instantiateable = true;
         }
-        else
-        {
-            instantiateable = false;
-        }
     }
 
     private void OnTriggerExit(Collider other)

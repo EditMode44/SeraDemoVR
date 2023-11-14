@@ -14,22 +14,16 @@ public class SeraDoor : MonoBehaviour
     private bool animCompleted;
     private bool boxCompleted;
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (!animCompleted && other.gameObject.TryGetComponent(out LocomotionSystem loc))
-        {
-            foreach (GameObject box in boxes)
-            {
-                box.transform.DOScale(1f, 0.5f).OnComplete(() => boxCompleted = true);
-            }
-            StartCoroutine(SeraPlantAnim());
-            animCompleted = true;
-        }
-    }
-
 
     private void Update()
     {
+        if (!animCompleted && BuildingManager.instance.GetTeleportComplete())
+        {
+            Invoke(nameof(Anim), 1f);
+            animCompleted = true;
+        }
+
+
         if (boxCompleted)
         {
             plantingBasketsParent.SetActive(true);
@@ -47,5 +41,15 @@ public class SeraDoor : MonoBehaviour
             yield return new WaitForSeconds(part.GetBuildPartData().waitTime);
         }
         hologram.transform.DOScale(0f, 0f).SetDelay(0.75f);
+    }
+
+
+    private void Anim()
+    {
+        foreach (GameObject box in boxes)
+        {
+            box.transform.DOScale(1f, 0.5f).OnComplete(() => boxCompleted = true);
+        }
+        StartCoroutine(SeraPlantAnim());
     }
 }

@@ -288,6 +288,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nut: {fileID: 2516969517927353930}
   nutTargetTransform: {x: 0, y: -0.0286, z: 0}
+  canBeRepositioned: 0
 --- !u!1 &2831094431628269694
 GameObject:
   m_ObjectHideFlags: 0

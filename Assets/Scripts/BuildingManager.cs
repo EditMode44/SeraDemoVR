@@ -17,11 +17,14 @@ public class BuildingManager : MonoBehaviour
     [SerializeField] private GameObject lastPipes;
     [SerializeField] private GameObject door;
     [SerializeField] private AudioClip metalAudio;
+    [SerializeField] private Transform plantTransform;
 
     [Header("Anim Options")]
     [SerializeField] private float waitTime;
     [SerializeField] private MainPart part;
     [SerializeField] private Camera playerCamera;
+
+    private bool teleportComplete;
 
 
     private void Awake()
@@ -80,11 +83,11 @@ public class BuildingManager : MonoBehaviour
             else
             {
                 StartCoroutine(ExplodeAnim());
-
             }
         }
         door.transform.DOScale(1f, 1f).SetDelay(1f);
-        Invoke(nameof(PlaySound), 0.75f);
+        audioSource.PlayOneShot(montajFinish);
+        Invoke(nameof(PlaySound), 2f);
     }
 
     private IEnumerator ExplodeAnim()
@@ -123,6 +126,18 @@ public class BuildingManager : MonoBehaviour
 
     private void PlaySound()
     {
-        audioSource.PlayOneShot(montajFinish);
+        TeleportManager.instance.Teleport(plantTransform);
+        Invoke(nameof(SetTeleportCompleteTrue), 1f);
+        
+    }
+
+    private void SetTeleportCompleteTrue()
+    {
+        teleportComplete = true;
+    }
+
+    public bool GetTeleportComplete()
+    {
+        return teleportComplete;
     }
 }

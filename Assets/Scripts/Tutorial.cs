@@ -28,6 +28,7 @@ public class Tutorial : MonoBehaviour
     [SerializeField] private GameObject tutorialDrill;
     [SerializeField] private AudioClip tutorialFinish;
     [SerializeField] private Image fadeImage;
+    [SerializeField] private Transform mountTransform;
     public InputActionProperty movementButton;
     public InputActionProperty turnButton;
     public InputActionProperty leftScrewButton;
@@ -82,8 +83,8 @@ public class Tutorial : MonoBehaviour
         ResetTutorials();
         canvas.transform.localScale = Vector3.zero;
         fadeImage.DOFade(0f, 1f).OnComplete(() =>
-        Invoke(nameof(StartTutorial), 2f)
-        ).SetDelay(2f);
+        Invoke(nameof(StartTutorial), 0.5f)
+        ).SetDelay(1f);
         playSound = true;
         tutorialMaterials[0].DOFade(0.95f, 0f);
     }
@@ -281,25 +282,13 @@ public class Tutorial : MonoBehaviour
         switch (currentMissionIndex)
         {
             case 0:
-                if (movementButton.action.ReadValue<Vector2>().magnitude > 0.9f && !misions[0].missionCompleted && playSound)
+                if ((leftInteractor.hasSelection || rightInteractor.hasSelection) && !misions[0].missionCompleted && playSound)
                 {
                     MisionCompleteActions();
                 }
                 break;
             case 1:
-                if (turnButton.action.ReadValue<Vector2>().magnitude > 0.9f && !misions[1].missionCompleted && playSound)
-                {
-                    MisionCompleteActions();
-                }
-                break;
-            case 2:
-                if ((leftInteractor.hasSelection || rightInteractor.hasSelection) && !misions[2].missionCompleted && playSound)
-                {
-                    MisionCompleteActions();
-                }
-                break;
-            case 3:
-                if ((leftInteractor.hasSelection || rightInteractor.hasSelection) && !misions[3].missionCompleted && playSound)
+                if ((leftInteractor.hasSelection || rightInteractor.hasSelection) && !misions[1].missionCompleted && playSound)
                 {
                     if (leftSelectedObject != null)
                     {
@@ -382,7 +371,7 @@ public class Tutorial : MonoBehaviour
 
         misions[currentMissionIndex].missionCompleted = true;
         tutorialText.DOColor(Color.green, 1f);
-        canvas.transform.DOScale(0f, 1f).SetDelay(1f).OnComplete(() => audioSource.PlayOneShot(tutorialFinish));
+        canvas.transform.DOScale(0f, 1f).SetDelay(1f);
         foreach (Material material in tutorialMaterials)
         {
             material.DOFade(0f, 2f).SetDelay(2f);
@@ -395,6 +384,7 @@ public class Tutorial : MonoBehaviour
 
         door.transform.DOLocalRotate(new Vector3(0f, 116f, 0f), 1.5f).SetDelay(4f);
         table.transform.DOLocalMove(tableTargetTransform, 1f).SetDelay(2f).OnComplete(() => tutorialDrill.SetActive(false));
+        TeleportManager.instance.Teleport(mountTransform);
     }
 
     public void RestartSera()

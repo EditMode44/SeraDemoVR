@@ -78,7 +78,7 @@ public class ScrewSpawner : MonoBehaviour
     private void InstantiateLeft(InputAction.CallbackContext obj)
     {
         if (leftScrew == null && leftInfo.GetInstantiateable())
-        {   
+        {
             if (!leftInteractor.hasSelection)
             {
                 if (!mainPart.GetCurrentScrewArea().IsHaveScrew())
